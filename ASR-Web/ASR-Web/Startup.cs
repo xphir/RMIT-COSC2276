@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using ASR_Web.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Asr.Models;
 
 namespace ASR_Web
 {
@@ -34,15 +35,15 @@ namespace ASR_Web
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<AsrContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             // from WDT Tutorial 08
-            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
                 options.Password.RequiredLength = 3;
                 options.Password.RequireDigit = options.Password.RequireNonAlphanumeric =
                     options.Password.RequireUppercase = options.Password.RequireLowercase = false;
-            }).AddDefaultUI().AddEntityFrameworkStores<ApplicationDbContext>();
+            }).AddDefaultUI().AddEntityFrameworkStores<AsrContext>();
 
             services.AddAuthentication().AddGoogle(googleOptions =>
             {
