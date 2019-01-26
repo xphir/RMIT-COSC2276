@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Slot>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+@*<p>
+    <a asp-action="Create">Create New</a>
+</p>*@
+
+@*<form asp-controller="Slots" asp-action="Index" method="get">
+    <p>
+        <select asp-for="MovieGenre" asp-items="Model.Genres">
+            <option value="">All</option>
+        </select>
+
+        Title: <input type="text" name="SearchString">
+        <input type="submit" value="Filter" />
+    </p>
+</form>*@
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.RoomID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StaffID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StudentID)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var slot in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(slotItem => slot.)
+                </td>
+                <td>
+                    @Html.DisplayFor(slotItem => slot.StartTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(slotItem => slot.StaffID)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(slotItem => slot.StudentID)
+                </td>
+                <td>
+                    @* Currently Bugged, need to figure out how to route to a direct item... *@
+                    <a asp-action="Edit" asp-route-id="@slot.">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@slot.RoomID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@slot.GetHashCode()">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
