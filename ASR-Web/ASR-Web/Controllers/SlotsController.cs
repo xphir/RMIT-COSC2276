@@ -27,14 +27,14 @@ namespace ASR_Web.Controllers
         }
 
         // GET: Movies/Details/5
-        public async Task<IActionResult> Details(int? hashCode)
+        public async Task<IActionResult> Details(string roomID)
         {
-            if (hashCode == null)
+            if (roomID == null)
             {
                 return NotFound();
             }
 
-            var selectedSlot = await _context.Slot.SingleOrDefaultAsync(m => m.GetHashCode() == hashCode);
+            var selectedSlot = await _context.Slot.SingleOrDefaultAsync(s => s.RoomID == roomID);
             if (selectedSlot == null)
             {
                 return NotFound();
