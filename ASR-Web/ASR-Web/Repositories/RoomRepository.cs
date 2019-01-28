@@ -23,22 +23,42 @@ namespace ASR_Web.Repositories
 
         public Room Create(Room room)
         {
-            throw new NotImplementedException();
+            var dbRoom = Find(room.RoomID);
+
+            if (dbRoom == null)
+            {
+                _db.Room.Add(room);
+                _db.SaveChanges();
+                return room;
+            }
+            return null;
         }
 
         public bool Delete(Room room)
         {
-            throw new NotImplementedException();
+            var dbRoom = Find(room.RoomID);
+            if (dbRoom != null)
+            {
+                _db.Room.Remove(dbRoom);
+                _db.SaveChanges();
+            }
+            return dbRoom == null;
         }
 
         public Room Find(string roomID)
         {
-            throw new NotImplementedException();
+            return _db.Room.FirstOrDefault(s => s.RoomID == roomID.ToUpper());
         }
 
         public Room Update(Room room)
         {
-            throw new NotImplementedException();
+            var dbRoom = Find(room.RoomID);
+            if (dbRoom != null)
+            {
+                dbRoom.RoomID = room.RoomID;
+                _db.SaveChanges();
+            }
+            return dbRoom;
         }
 
         public Room Validate(Room room)
