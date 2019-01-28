@@ -60,7 +60,7 @@ namespace ASR_Web.api
 
         // PUT api/<controller>/5
         [HttpPost("create")]
-        public IActionResult PostCreateRoom([FromBody]Room room)
+        public IActionResult CreateRoom([FromBody]Room room)
         {
             if (room == null)
             {
@@ -72,7 +72,7 @@ namespace ASR_Web.api
                 var createdRoom = repo.Create(room);
                 if (createdRoom != null)
                 {
-                    return Ok(new { status = "success", message = "Room has been created", data = new { movie = createdRoom } });
+                    return Ok(new { status = "success", message = "Room has been created", data = new { room = createdRoom } });
                 }
             }
             return NotFound(new { status = "fail", message = "Cannot save room", data = ModelState.Values.Select(v => v.Errors) });
@@ -80,7 +80,7 @@ namespace ASR_Web.api
 
         // DELETE api/<controller>/5
         [HttpDelete("delete")]
-        public IActionResult Delete([FromBody]Room room)
+        public IActionResult DeleteRoom([FromBody]Room room)
         {
             var deletedRoom = repo.Delete(room);
             if (deletedRoom)

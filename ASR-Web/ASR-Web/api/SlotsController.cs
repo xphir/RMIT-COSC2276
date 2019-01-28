@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ASR_Web.Data;
+using ASR_Web.Models;
 using ASR_Web.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -96,12 +97,37 @@ namespace ASR_Web.api
         {
         }
 
+        // Post api/<controller>/5
+        [HttpPost("create")]
+        public IActionResult CreateSlot([FromBody]Slot slot)
+        {
+            if (slot == null)
+            {
+                return NotFound(new { status = "fail", message = "Slot information must be supplied" });
+            }
+
+            if (ModelState.IsValid)
+            {
+                var createdSlot = repo.Create(slot);
+                if (createdSlot != null)
+                {
+                    return Ok(new { status = "success", message = "Slot has been created", data = new { slot = createdSlot } });
+                }
+            }
+            return NotFound(new { status = "fail", message = "Cannot save slot", data = ModelState.Values.Select(v => v.Errors) });
+        }
+
 
         // DELETE api/<controller>/5
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        [HttpDelete("delete")]
+        public IActionResult DeleteSlot([FromBody]Slot slot)
         {
-            return NotFound(new { status = "fail", message = "Cannot delete selected slot" });
+            var deletedSlot = repo.Delete(slot);
+            if (deletedSlot)
+            {
+                return Ok(new { status = "success", message = "Slot has been deleted" });
+            }
+            return NotFound(new { status = "fail", message = "Cannot delete slot" });
         }
     }
 }
