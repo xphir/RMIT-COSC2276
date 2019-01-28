@@ -10,9 +10,9 @@ namespace ASR_Web.Controllers
 {
     public class RoomsController : Controller
     {
-        private readonly AsrContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public RoomsController(AsrContext context)
+        public RoomsController(ApplicationDbContext context)
         {
             _context = context;
         }

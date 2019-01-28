@@ -15,7 +15,7 @@ namespace Asr.Data
         {
             using(var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>())
             using(var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>())
-            using(var context = new AsrContext(serviceProvider.GetRequiredService<DbContextOptions<AsrContext>>()))
+            using(var context = new ApplicationDbContext(serviceProvider.GetRequiredService<DbContextOptions<ApplicationDbContext>>()))
             {
                 await InitialiseUsersAsync(userManager, roleManager);
                 await InitialiseAsrDataAsync(context, userManager);
@@ -53,7 +53,7 @@ namespace Asr.Data
                 await userManager.AddToRoleAsync(user, role);
         }
 
-        private static async Task InitialiseAsrDataAsync(AsrContext context, UserManager<ApplicationUser> userManager)
+        private static async Task InitialiseAsrDataAsync(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             // Look for any rooms.
             if(await context.Room.AnyAsync())
@@ -96,7 +96,7 @@ namespace Asr.Data
             await UpdateUserAsync(userManager, "s4567890@student.rmit.edu.au", "s4567890");
         }
 
-        private static async Task CreateStaffAsync(AsrContext context, string id, string name)
+        private static async Task CreateStaffAsync(ApplicationDbContext context, string id, string name)
         {
             await context.Staff.AddAsync(new Staff
             {
@@ -106,7 +106,7 @@ namespace Asr.Data
             });
         }
 
-        private static async Task CreateStudentAsync(AsrContext context, string id, string name)
+        private static async Task CreateStudentAsync(ApplicationDbContext context, string id, string name)
         {
             await context.Student.AddAsync(new Student
             {

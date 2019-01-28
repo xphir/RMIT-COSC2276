@@ -22,7 +22,7 @@ namespace Asr
 
                 try
                 {
-                    services.GetRequiredService<AsrContext>().Database.Migrate();
+                    services.GetRequiredService<ApplicationDbContext>().Database.Migrate();
                     SeedData.InitialiseAsync(services).Wait();
                 }
                 catch(Exception e)

@@ -13,6 +13,7 @@ using ASR_Web.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Asr.Models;
+using ASR_Web.Repositories;
 
 namespace ASR_Web
 {
@@ -35,7 +36,7 @@ namespace ASR_Web
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<AsrContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             // from WDT Tutorial 08
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>
@@ -43,7 +44,7 @@ namespace ASR_Web
                 options.Password.RequiredLength = 3;
                 options.Password.RequireDigit = options.Password.RequireNonAlphanumeric =
                     options.Password.RequireUppercase = options.Password.RequireLowercase = false;
-            }).AddDefaultUI().AddEntityFrameworkStores<AsrContext>();
+            }).AddDefaultUI().AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddAuthentication().AddGoogle(googleOptions =>
             {
@@ -52,6 +53,9 @@ namespace ASR_Web
             });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            // repositories
+            services.AddScoped<ISlotRepository, SlotRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -8,9 +8,9 @@ using Asr.Models;
 
 namespace ASR_Web.Data
 {
-    public class AsrContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public AsrContext(DbContextOptions<AsrContext> options) : base(options)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         { }
 
         public DbSet<Room> Room { get; set; }
