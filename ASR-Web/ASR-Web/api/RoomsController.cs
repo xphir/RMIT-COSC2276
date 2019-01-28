@@ -79,9 +79,15 @@ namespace ASR_Web.api
         }
 
         // DELETE api/<controller>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("delete")]
+        public IActionResult Delete([FromBody]Room room)
         {
+            var deletedRoom = repo.Delete(room);
+            if (deletedRoom)
+            {
+                return Ok(new { status = "success", message = "Room has been deleted" });
+            }
+            return NotFound(new { status = "fail", message = "Cannot delete room" });
         }
     }
 }

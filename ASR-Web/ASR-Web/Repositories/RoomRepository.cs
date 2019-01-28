@@ -42,7 +42,13 @@ namespace ASR_Web.Repositories
                 _db.Room.Remove(dbRoom);
                 _db.SaveChanges();
             }
-            return dbRoom == null;
+
+            if (Find(room.RoomID) == null)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         public Room Find(string roomID)
