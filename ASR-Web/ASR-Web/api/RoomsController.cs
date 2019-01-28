@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ASR_Web.Data;
+using ASR_Web.Models;
 using ASR_Web.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
@@ -55,6 +56,26 @@ namespace ASR_Web.api
         [HttpPut("{id}")]
         public void Put(int id, [FromBody]string value)
         {
+        }
+
+        // PUT api/<controller>/5
+        [HttpPost("create")]
+        public IActionResult PostCreateRoom([FromBody]Room room)
+        {
+            if (room == null)
+            {
+                return NotFound(new { status = "fail", message = "Room information must be supplied" });
+            }
+
+            if (ModelState.IsValid)
+            {
+                var createdRoom = repo.Create(room);
+                if (createdRoom != null)
+                {
+                    return Ok(new { status = "success", message = "Room has been created", data = new { movie = createdRoom } });
+                }
+            }
+            return NotFound(new { status = "fail", message = "Cannot save room", data = ModelState.Values.Select(v => v.Errors) });
         }
 
         // DELETE api/<controller>/5
