@@ -23,7 +23,7 @@ namespace ASR_Web.api
             repo = repository;
         }
 
-        // GET: api/Movies/
+        //// GET: api/<controller>
         [HttpGet]
         public IActionResult Get()
         {

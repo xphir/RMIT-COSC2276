@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ASR_Web.Repositories
 {
-    interface IRoomRepository
+    public interface IRoomRepository
     {
         IEnumerable<Room> All();
 
