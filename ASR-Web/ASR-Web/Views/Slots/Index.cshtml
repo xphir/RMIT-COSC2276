@@ -25,7 +25,10 @@
                 @Html.DisplayNameFor(model => model.RoomID)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.StartTime)
+                Date
+            </th>
+            <th>
+                Time
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.StaffID)
@@ -39,28 +42,31 @@
     <tbody>
         @foreach (var slot in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(slotItem => slot.RoomID)
-                </td>
-                <td>
-                    @Html.DisplayFor(slotItem => slot.StartTime)
-                </td>
-                <td>
-                    @Html.DisplayFor(slotItem => slot.StaffID)
-                </td>
+        <tr>
+            <td>
+                @Html.DisplayFor(slotItem => slot.RoomID)
+            </td>
+            <td>
+                @slot.StartTime.ToString("d")
+            </td>
+            <td>
+                @Html.DisplayFor(slotItem => slot.StartTime.TimeOfDay)
+            </td>
+            <td>
+                @Html.DisplayFor(slotItem => slot.StaffID)
+            </td>
 
-                <td>
-                    @Html.DisplayFor(slotItem => slot.StudentID)
-                </td>
-                <td>
-                    @* Currently Bugged, need to figure out how to route to a direct item... *@
-                    <a asp-action="Edit" asp-route-id="@slot.">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@slot.RoomID, @slot.StartTime">Details</a> |
-                    <a asp-action="Book" asp-route-id="@slot.RoomID">Book</a> |
-                    <a asp-action="Delete" asp-route-id="@slot.GetHashCode()">Delete</a>
-                </td>
-            </tr>
+            <td>
+                @Html.DisplayFor(slotItem => slot.StudentID)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { RoomID = slot.RoomID, StartTime = slot.StartTime.ToString("s") }) |
+                @Html.ActionLink("Details", "Details", new { RoomID = slot.RoomID, StartTime = slot.StartTime.ToString("s") }) |
+                @Html.ActionLink("Book", "Book", new { RoomID = slot.RoomID, StartTime = slot.StartTime.ToString("s") }) |
+                @Html.ActionLink("Delete", "Delete", new { RoomID = slot.RoomID, StartTime = slot.StartTime.ToString("s") })
+                @Html.IdForModel()
+            </td>
+        </tr>
         }
     </tbody>
 </table>

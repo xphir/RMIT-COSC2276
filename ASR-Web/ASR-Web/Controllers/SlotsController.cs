@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using ASR_Web.Data;
 using ASR_Web.Models;
 using ASR_Web.Models.SlotViewModels;
+using ASR_Web.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -13,49 +14,40 @@ namespace ASR_Web.Controllers
 {
     public class SlotsController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private ISlotRepository _repo;
+        private ApplicationDbContext _db;
 
-        public SlotsController(ApplicationDbContext context)
+        public SlotsController(ApplicationDbContext db, ISlotRepository repository)
         {
-            _context = context;
+            _db = db;
+            _repo = repository;
         }
 
-        //FROM W9 Tute Files
-        // GET: Slots
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _context.Slot.ToListAsync());
-            //View(await _context.Slot.Include(s => s.Room).Include(s => s.Staff).Include(s => s.Student).ToListAsync());
+            return View(_repo.All());
         }
 
-        // GET: Movies/Details/5
-
-        // GET: Slots/Create
-        public async Task<IActionResult> Create()
+        public IActionResult Details(string RoomID, string StartTime)
         {
-            var rooms = _context.Room.Select(x => x.RoomID).Distinct().OrderBy(x => x);
-            var slot = new Slot();
+            //Incoming StartTimes should be in the following format YYYY-MM-DD-THH:mm:ss 2019-01-30T00:00:00
 
-            return View(new SlotCreateViewModel
-            {
-                Rooms = new SelectList(await rooms.ToListAsync()),
-                Slot = slot
-            });
-
-
-        }
-
-        // GET: Slot/Details/
-        public async Task<IActionResult> Details(string roomID, DateTime startTime)
-        {
-
-            if ((!string.IsNullOrEmpty(roomID)) && (startTime != DateTime.MinValue))
+            //Check the RoomID & StartTime fields are there
+            if ((string.IsNullOrEmpty(RoomID)) && (string.IsNullOrEmpty(StartTime)))
             {
                 return NotFound();
             }
 
-            var selectedSlot = await _context.Slot.SingleOrDefaultAsync(s => s.RoomID == roomID && s.StartTime == startTime);
+            //Try get the DateTime from the input string StartTime
+            if (!(DateTime.TryParse(StartTime, out DateTime startTimeValue)))
+            {
+                return NotFound();
+            }
 
+            //Find the selected slot from the repo/db
+            var selectedSlot = _repo.Find(RoomID, startTimeValue);
+
+            //if null then nothing was found
             if (selectedSlot == null)
             {
                 return NotFound();

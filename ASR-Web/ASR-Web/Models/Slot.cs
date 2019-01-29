@@ -14,12 +14,14 @@ namespace ASR_Web.Models
         public string RoomID { get; set; }
         public virtual Room Room { get; set; }
 
+        //[DisplayFormat(DataFormatString = "{0:s}")]
         public DateTime StartTime { get; set; }
 
         [Required]
         public string StaffID { get; set; }
         public virtual Staff Staff { get; set; }
 
+        [DisplayFormat(NullDisplayText = "No Booking", ApplyFormatInEditMode = true)]
         public string StudentID { get; set; }
         public virtual Student Student { get; set; }
     }
