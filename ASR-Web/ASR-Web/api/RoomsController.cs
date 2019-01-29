@@ -82,6 +82,11 @@ namespace ASR_Web.api
         [HttpDelete("delete")]
         public IActionResult DeleteRoom([FromBody]Room room)
         {
+            if(repo.Find(room.RoomID) == null)
+            {
+                return NotFound(new { status = "fail", message = "Room does not exist" });
+            }
+
             var deletedRoom = repo.Delete(room);
             if (deletedRoom)
             {
