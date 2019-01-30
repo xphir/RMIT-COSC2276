@@ -36,14 +36,22 @@ namespace ASR_Web.Repositories
                 slots = slots.Where(s => s.RoomID == RoomSelect);
             }
 
-            if (!string.IsNullOrEmpty(RoomSelect))
+            if (!string.IsNullOrEmpty(StaffSelect))
             {
                 slots = slots.Where(s => s.StaffID == StaffSelect);
             }
 
-            if (!string.IsNullOrEmpty(RoomSelect))
+            if (!string.IsNullOrEmpty(StudentSelect))
             {
-                slots = slots.Where(s => s.StudentID == StudentSelect);
+                if (StudentSelect == "FreeSlot")
+                {
+                    slots = slots.Where(s => s.StudentID == null);
+                }
+                else
+                {
+                    slots = slots.Where(s => s.StudentID == StudentSelect);
+                }
+                    
             }
 
             return slots.ToList();
@@ -62,7 +70,7 @@ namespace ASR_Web.Repositories
 
         public IEnumerable<String> GetDistinctStudents()
         {
-            return _db.Slot.Select(x => x.StudentID).Distinct().OrderBy(x => x).ToList();
+            return _db.Slot.Select(x => x.StudentID).Where(x => x != null).Distinct().OrderBy(x => x).ToList();
         }
 
         public Slot Create(Slot slot)

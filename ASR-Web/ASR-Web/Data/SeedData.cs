@@ -131,6 +131,37 @@ namespace Asr.Data
                     RoomID = "D",
                     StartTime = new DateTime(2019, 2, 25, 10, 0, 0),
                     StaffID = "e98765",
+                },
+                new Slot
+                {
+                    RoomID = "A",
+                    StartTime = new DateTime(2019, 2, 22, 09, 0, 0),
+                    StaffID = "e12345",
+                },
+                new Slot
+                {
+                    RoomID = "A",
+                    StartTime = new DateTime(2019, 2, 22, 10, 0, 0),
+                    StaffID = "e56789",
+                },
+                new Slot
+                {
+                    RoomID = "A",
+                    StartTime = new DateTime(2019, 2, 22, 11, 0, 0),
+                    StaffID = "e54321",
+                },
+                new Slot
+                {
+                    RoomID = "A",
+                    StartTime = new DateTime(2019, 2, 22, 12, 0, 0),
+                    StaffID = "e98765",
+                },
+                new Slot
+                {
+                    RoomID = "A",
+                    StartTime = new DateTime(2019, 2, 22, 13, 0, 0),
+                    StaffID = "e12345",
+                    StudentID = "s4567890"
                 }
             );
 
