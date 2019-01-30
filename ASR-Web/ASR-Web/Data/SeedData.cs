@@ -35,6 +35,8 @@ namespace Asr.Data
             await CreateUserAndEnsureUserHasRoleAsync(userManager, "e56789@rmit.edu.au", Constants.StaffRole);
             await CreateUserAndEnsureUserHasRoleAsync(userManager, "s1234567@student.rmit.edu.au", Constants.StudentRole);
             await CreateUserAndEnsureUserHasRoleAsync(userManager, "s4567890@student.rmit.edu.au", Constants.StudentRole);
+
+            await EnsureUserHasRoleAsync(userManager, "s3530160@student.rmit.edu.au", Constants.StudentRole);
         }
 
         private static async Task CreateUserAndEnsureUserHasRoleAsync(
@@ -88,12 +90,16 @@ namespace Asr.Data
                 }
             );
 
-            await context.SaveChangesAsync();
 
             await UpdateUserAsync(userManager, "e12345@rmit.edu.au", "e12345");
             await UpdateUserAsync(userManager, "e56789@rmit.edu.au", "e56789");
             await UpdateUserAsync(userManager, "s1234567@student.rmit.edu.au", "s1234567");
             await UpdateUserAsync(userManager, "s4567890@student.rmit.edu.au", "s4567890");
+
+            await CreateStudentAsync(context, "s3530160", "Elliot");
+            await context.SaveChangesAsync();
+
+            await UpdateUserAsync(userManager, "s3530160@student.rmit.edu.au", "s3530160");
         }
 
         private static async Task CreateStaffAsync(AsrContext context, string id, string name)
