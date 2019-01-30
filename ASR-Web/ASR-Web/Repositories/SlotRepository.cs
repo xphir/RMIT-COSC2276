@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Asr.Data;
 using ASR_Web.Data;
 using ASR_Web.Models;
 using Microsoft.EntityFrameworkCore;
@@ -17,19 +18,29 @@ namespace ASR_Web.Repositories
             _db = context;
         }
 
+        //CHANGE THIS VALUE IF YOU WANT RESULTS FROM THE PAST
+        private IQueryable<Slot> BaseSlotSelector()
+        {
+            if (Constants.PastResults)
+            {
+                return _db.Slot;
+            }
+            else
+            {
+                return _db.Slot.Where(s => s.StartTime > DateTime.Now);
+            }
+            
+        }
+      
+
         public IEnumerable<Slot> GetAllSlots()
         {
-            return _db.Slot.ToList();
-               //.Include(s => s.RoomID)
-               //.Include(s => s.StartTime)
-               //.Include(s => s.StaffID)
-               //.Include(s => s.StudentID)
-               //.ToList();
+            return BaseSlotSelector().ToList();
         }
 
         public IEnumerable<Slot> GetFilteredSlots(string RoomSelect, string StaffSelect, string StudentSelect)
         {
-            var slots = _db.Slot.Select(x => x);
+            var slots = BaseSlotSelector();
 
             if (!string.IsNullOrEmpty(RoomSelect))
             {
@@ -60,17 +71,30 @@ namespace ASR_Web.Repositories
 
         public IEnumerable<String> GetDistinctRooms()
         {
-            return _db.Slot.Select(x => x.RoomID).Distinct().OrderBy(x => x).ToList();
+            return BaseSlotSelector()
+                .Select(x => x.RoomID)
+                .Distinct()
+                .OrderBy(x => x)
+                .ToList();
         }
 
         public IEnumerable<String> GetDistinctStaff()
         {
-            return _db.Slot.Select(x => x.StaffID).Distinct().OrderBy(x => x).ToList();
+            return BaseSlotSelector()
+                .Select(x => x.StaffID)
+                .Distinct()
+                .OrderBy(x => x)
+                .ToList();
         }
 
         public IEnumerable<String> GetDistinctStudents()
         {
-            return _db.Slot.Select(x => x.StudentID).Where(x => x != null).Distinct().OrderBy(x => x).ToList();
+            return BaseSlotSelector()
+                .Select(x => x.StudentID)
+                .Where(x => x != null)
+                .Distinct()
+                .OrderBy(x => x)
+                .ToList();
         }
 
         public Slot Create(Slot slot)
@@ -117,55 +141,36 @@ namespace ASR_Web.Repositories
 
         public Slot Find(string roomID, DateTime startTime)
         {
-            return _db.Slot.FirstOrDefault(s => s.RoomID == roomID.ToUpper() && s.StartTime == startTime);
+            return BaseSlotSelector()
+                .FirstOrDefault(s => s.RoomID == roomID.ToUpper() && s.StartTime == startTime);
         }
 
         public IEnumerable<Slot> SearchByDate(DateTime start, DateTime end)
         {
-            return _db.Slot
+            return BaseSlotSelector()
                 .Where(s => s.StartTime >= start && s.StartTime <= end)
                 .ToList();
-                //.Include(s => s.RoomID)
-                //.Include(s => s.StartTime)
-                //.Include(s => s.StaffID)
-                //.Include(s => s.StudentID)
-                //.ToList();
         }
 
         public IEnumerable<Slot> SearchByRoom(string roomID)
         {
-            return _db.Slot
+            return BaseSlotSelector()
                 .Where(s => s.RoomID == roomID.ToUpper() && s.StartTime > DateTime.Now)
                 .ToList();
-                //.Include(s => s.RoomID)
-                //.Include(s => s.StartTime)
-                //.Include(s => s.StaffID)
-                //.Include(s => s.StudentID)
-                //.ToList();
         }
 
         public IEnumerable<Slot> SearchByStaff(string staffID)
         {
-            return _db.Slot
+            return BaseSlotSelector()
                 .Where(s => s.StaffID == staffID.ToLower() && s.StartTime > DateTime.Now)
                 .ToList();
-                //.Include(s => s.RoomID)
-                //.Include(s => s.StartTime)
-                //.Include(s => s.StaffID)
-                //.Include(s => s.StudentID)
-                //.ToList();
         }
 
         public IEnumerable<Slot> SearchByStudent(string studentID)
         {
-            return _db.Slot
+            return BaseSlotSelector()
                 .Where(s => s.StudentID == studentID.ToLower() && s.StartTime > DateTime.Now)
                 .ToList();
-                //.Include(s => s.RoomID)
-                //.Include(s => s.StartTime)
-                //.Include(s => s.StaffID)
-                //.Include(s => s.StudentID)
-                //.ToList();
         }
 
         public Slot Validate(Slot slot)
@@ -182,21 +187,21 @@ namespace ASR_Web.Repositories
 
         public IEnumerable<Slot> GetAvailibleSlots()
         {
-            return _db.Slot
+            return BaseSlotSelector()
                 .Where(s => s.StudentID != null && s.StartTime > DateTime.Now)
                 .ToList();
         }
 
         public IEnumerable<Slot> GetAvailibleSlotsGivenDay(DateTime day)
         {
-            return _db.Slot
+            return BaseSlotSelector()
                  .Where(s => s.StudentID != null && s.StartTime.Date > day.Date)
                  .ToList();
         }
 
         public IEnumerable<Slot> GetRoomSlotsGivenDay(string roomID, DateTime day)
         {
-            return _db.Slot
+            return BaseSlotSelector()
                  .Where(s => s.RoomID == roomID && s.StartTime.Date > day.Date)
                  .ToList();
         }
