@@ -8,16 +8,20 @@ namespace ASR_Web.Repositories
 {
     public interface ISlotRepository
     {
-        IEnumerable<Slot> All();
+        IEnumerable<Slot> GetAllSlots();
         IEnumerable<Slot> GetAvailibleSlots();
         IEnumerable<Slot> GetAvailibleSlotsGivenDay(DateTime day);
         IEnumerable<Slot> GetRoomSlotsGivenDay(string roomID, DateTime day);
+        IEnumerable<Slot> GetFilteredSlots(string RoomSelect, string StaffSelect, string StudentSelect);
 
         IEnumerable<Slot> SearchByRoom(string roomID);
         IEnumerable<Slot> SearchByDate(DateTime start, DateTime end);
         IEnumerable<Slot> SearchByStaff(string  staffID);
         IEnumerable<Slot> SearchByStudent(string studentID);
 
+        IEnumerable<String> GetDistinctRooms();
+        IEnumerable<String> GetDistinctStaff();
+        IEnumerable<String> GetDistinctStudents();
 
         Slot Find(string roomID, DateTime startTime);
         Slot Create(Slot slot);

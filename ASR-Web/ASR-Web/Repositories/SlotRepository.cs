@@ -17,7 +17,7 @@ namespace ASR_Web.Repositories
             _db = context;
         }
 
-        public IEnumerable<Slot> All()
+        public IEnumerable<Slot> GetAllSlots()
         {
             return _db.Slot.ToList();
                //.Include(s => s.RoomID)
@@ -25,6 +25,44 @@ namespace ASR_Web.Repositories
                //.Include(s => s.StaffID)
                //.Include(s => s.StudentID)
                //.ToList();
+        }
+
+        public IEnumerable<Slot> GetFilteredSlots(string RoomSelect, string StaffSelect, string StudentSelect)
+        {
+            var slots = _db.Slot.Select(x => x);
+
+            if (!string.IsNullOrEmpty(RoomSelect))
+            {
+                slots = slots.Where(s => s.RoomID == RoomSelect);
+            }
+
+            if (!string.IsNullOrEmpty(RoomSelect))
+            {
+                slots = slots.Where(s => s.StaffID == StaffSelect);
+            }
+
+            if (!string.IsNullOrEmpty(RoomSelect))
+            {
+                slots = slots.Where(s => s.StudentID == StudentSelect);
+            }
+
+            return slots.ToList();
+
+        }
+
+        public IEnumerable<String> GetDistinctRooms()
+        {
+            return _db.Slot.Select(x => x.RoomID).Distinct().OrderBy(x => x).ToList();
+        }
+
+        public IEnumerable<String> GetDistinctStaff()
+        {
+            return _db.Slot.Select(x => x.StaffID).Distinct().OrderBy(x => x).ToList();
+        }
+
+        public IEnumerable<String> GetDistinctStudents()
+        {
+            return _db.Slot.Select(x => x.StudentID).Distinct().OrderBy(x => x).ToList();
         }
 
         public Slot Create(Slot slot)

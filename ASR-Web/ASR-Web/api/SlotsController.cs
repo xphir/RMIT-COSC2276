@@ -28,7 +28,7 @@ namespace ASR_Web.api
         [HttpGet]
         public IActionResult Get()
         {
-            var allSlots = repo.All();
+            var allSlots = repo.GetAllSlots();
 
             return Ok(
                 new

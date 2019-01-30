@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ASR_Web.Models.Slot>
+﻿@model ASR_Web.Models.SlotViewModels.SlotIndexViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -6,23 +6,30 @@
 
 <h2>Index</h2>
 
-@*@section entryHeader {
-    <div class="entry-header">
-        <div class="container">
-            <h3>All Movies</h3>
-            @if (User.IsInRole("staff"))
-        {
-            <p>@{ Html.RenderPartial("_AddSlot", new Slot()); }</p>
-        }
-        </div>
-    </div>
-}*@
+<form asp-controller="Slots" asp-action="Index" method="get">
+    <p>
+        Room Select:
+        <select asp-for="RoomSelect" asp-items="Model.Rooms">
+            <option value="">All</option>
+        </select>
+        | Staff Select:
+        <select asp-for="StaffSelect" asp-items="Model.Staff">
+            <option value="">All</option>
+        </select>
+        | Student Select:
+        <select asp-for="StudentSelect" asp-items="Model.Students">
+            <option value="">All</option>
+        </select>
+        | 
+        <input type="submit" value="Filter" />
+    </p>
+</form>
 
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.RoomID)
+                Room ID
             </th>
             <th>
                 Date
@@ -31,16 +38,16 @@
                 Time
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.StaffID)
+                Staff ID
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.StudentID)
+                Booking
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var slot in Model)
+        @foreach (var slot in Model.Slots)
         {
         <tr>
             <td>

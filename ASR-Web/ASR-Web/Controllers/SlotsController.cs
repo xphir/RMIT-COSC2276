@@ -23,9 +23,23 @@ namespace ASR_Web.Controllers
             _repo = repository;
         }
 
-        public IActionResult Index()
+        //public IActionResult Index()
+        //{
+
+
+        //    return View(_repo.All());
+        //}
+        
+        // GET: Movies
+        public IActionResult Index(string RoomSelect, string StaffSelect, string StudentSelect)
         {
-            return View(_repo.All());
+            return View(new SlotIndexViewModel
+            {
+                Slots = _repo.GetFilteredSlots(RoomSelect, StaffSelect, StudentSelect),
+                Rooms = new SelectList(_repo.GetDistinctRooms()),
+                Staff = new SelectList(_repo.GetDistinctStaff()),
+                Students = new SelectList(_repo.GetDistinctStudents()),
+            });
         }
 
         public IActionResult Details(string RoomID, string StartTime)
