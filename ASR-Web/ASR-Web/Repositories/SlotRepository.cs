@@ -99,6 +99,7 @@ namespace ASR_Web.Repositories
 
         public Slot Create(Slot slot)
         {
+            //Check if valid Student in database, otherwise Exception is thrown
             var dbSlot = Find(slot.RoomID, slot.StartTime);
 
             if (dbSlot == null)

@@ -69,5 +69,26 @@ namespace ASR_Web.Controllers
 
             return View(selectedSlot);
         }
+
+        // GET: Slots/Create
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: Slots/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Slot slot)
+        {
+            if (ModelState.IsValid)
+            {
+                _repo.Create(slot);
+            }
+
+            return View();
+        }
     }
 }
+
+   

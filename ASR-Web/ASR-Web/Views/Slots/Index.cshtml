@@ -6,6 +6,18 @@
 
 <h2>Index</h2>
 
+@if (User.IsInRole("Staff"))
+{
+    <p>
+        <a asp-action="Create">Create New Slot</a>
+    </p>
+}
+
+    <p>
+        <a asp-action="Create">Create New Slot (Visible to all, for debugging only)</a>
+    </p>
+
+
 <form asp-controller="Slots" asp-action="Index" method="get">
     <p>
         Room Select:
@@ -21,7 +33,7 @@
             <option value="">All</option>
             <option value="FreeSlot">Free Booking</option>
         </select>
-        | 
+        |
         <input type="submit" value="Filter" />
     </p>
 </form>
@@ -50,31 +62,31 @@
     <tbody>
         @foreach (var slot in Model.Slots)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(slotItem => slot.RoomID)
-            </td>
-            <td>
-                @slot.StartTime.ToString("d")
-            </td>
-            <td>
-                @Html.DisplayFor(slotItem => slot.StartTime.TimeOfDay)
-            </td>
-            <td>
-                @Html.DisplayFor(slotItem => slot.StaffID)
-            </td>
+            <tr>
+                <td>
+                    @Html.DisplayFor(slotItem => slot.RoomID)
+                </td>
+                <td>
+                    @slot.StartTime.ToString("d")
+                </td>
+                <td>
+                    @Html.DisplayFor(slotItem => slot.StartTime.TimeOfDay)
+                </td>
+                <td>
+                    @Html.DisplayFor(slotItem => slot.StaffID)
+                </td>
 
-            <td>
-                @Html.DisplayFor(slotItem => slot.StudentID)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { RoomID = slot.RoomID, StartTime = slot.StartTime.ToString("s") }) |
-                @Html.ActionLink("Details", "Details", new { RoomID = slot.RoomID, StartTime = slot.StartTime.ToString("s") }) |
-                @Html.ActionLink("Book", "Book", new { RoomID = slot.RoomID, StartTime = slot.StartTime.ToString("s") }) |
-                @Html.ActionLink("Delete", "Delete", new { RoomID = slot.RoomID, StartTime = slot.StartTime.ToString("s") })
-                @Html.IdForModel()
-            </td>
-        </tr>
+                <td>
+                    @Html.DisplayFor(slotItem => slot.StudentID)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { RoomID = slot.RoomID, StartTime = slot.StartTime.ToString("s") }) |
+                    @Html.ActionLink("Details", "Details", new { RoomID = slot.RoomID, StartTime = slot.StartTime.ToString("s") }) |
+                    @Html.ActionLink("Book", "Book", new { RoomID = slot.RoomID, StartTime = slot.StartTime.ToString("s") }) |
+                    @Html.ActionLink("Delete", "Delete", new { RoomID = slot.RoomID, StartTime = slot.StartTime.ToString("s") })
+                    @Html.IdForModel()
+                </td>
+            </tr>
         }
     </tbody>
 </table>
