@@ -27,6 +27,8 @@ namespace ASR_Web.Repositories
         Slot Create(Slot slot);
         Slot Update(Slot slot);
         Slot Validate(Slot slot);
+        Slot Book(Slot slot, String BookingID);
+        Slot UnBook(Slot slot);
 
         bool Delete(Slot slot);
     }

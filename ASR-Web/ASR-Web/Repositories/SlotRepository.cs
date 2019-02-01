@@ -115,6 +115,34 @@ namespace ASR_Web.Repositories
             return null;
         }
 
+        public Slot Book(Slot slot, String BookingID)
+        {
+            var dbSlot = Find(slot.RoomID, slot.StartTime);
+            if (dbSlot != null)
+            {
+                dbSlot.RoomID = slot.RoomID;
+                dbSlot.StartTime = slot.StartTime;
+                dbSlot.StaffID = slot.StaffID;
+                dbSlot.StudentID = BookingID;
+                _db.SaveChanges();
+            }
+            return dbSlot;
+        }
+
+        public Slot UnBook(Slot slot)
+        {
+            var dbSlot = Find(slot.RoomID, slot.StartTime);
+            if (dbSlot != null)
+            {
+                dbSlot.RoomID = slot.RoomID;
+                dbSlot.StartTime = slot.StartTime;
+                dbSlot.StaffID = slot.StaffID;
+                dbSlot.StudentID = null;
+                _db.SaveChanges();
+            }
+            return dbSlot;
+        }
+
         public Slot Update(Slot slot)
         {
             var dbSlot = Find(slot.RoomID, slot.StartTime);

@@ -1,4 +1,8 @@
 ﻿@model ASR_Web.Models.SlotViewModels.SlotIndexViewModel
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<Asr.Models.ApplicationUser> SignInManager
+@inject UserManager<Asr.Models.ApplicationUser> UserManager
 
 @{
     ViewData["Title"] = "Index";
@@ -12,11 +16,6 @@
         <a asp-action="Create">Create New Slot</a>
     </p>
 }
-
-    <p>
-        <a asp-action="Create">Create New Slot (Visible to all, for debugging only)</a>
-    </p>
-
 
 <form asp-controller="Slots" asp-action="Index" method="get">
     <p>
@@ -80,10 +79,34 @@
                     @Html.DisplayFor(slotItem => slot.StudentID)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { RoomID = slot.RoomID, StartTime = slot.StartTime.ToString("s") }) |
+
+                    @* @Html.ActionLink("Edit", "Edit", new { RoomID = slot.RoomID, StartTime = slot.StartTime.ToString("s") }) | *@
                     @Html.ActionLink("Details", "Details", new { RoomID = slot.RoomID, StartTime = slot.StartTime.ToString("s") }) |
-                    @Html.ActionLink("Book", "Book", new { RoomID = slot.RoomID, StartTime = slot.StartTime.ToString("s") }) |
-                    @Html.ActionLink("Delete", "Delete", new { RoomID = slot.RoomID, StartTime = slot.StartTime.ToString("s") })
+
+                    @if (User.IsInRole("Student") && (slot.StudentID == null))
+                    {
+                        String StudentID = @UserManager.GetUserName(User).Substring(0, 8);
+                        //Weird bug, the book slot link won't work without two of these links. Can't figure it out so just leaving these both here for now. In my testing only one is visible.
+                        @Html.ActionLink("Book", "Book", new { RoomID = slot.RoomID, StartTime = slot.StartTime.ToString("s"), BookingID = StudentID });
+                        @Html.ActionLink("Book Slot |", "Book", new { RoomID = slot.RoomID, StartTime = slot.StartTime.ToString("s"), BookingID = StudentID });
+
+                    }
+
+                    @if (User.IsInRole("Student"))
+                    {
+                        String StudentID = @UserManager.GetUserName(User).Substring(0, 8);
+                        String BookedID = slot.StudentID;
+                        if (StudentID == BookedID)
+                        {
+                            @Html.ActionLink("Delete Booking |", "Book", new { RoomID = slot.RoomID, StartTime = slot.StartTime.ToString("s") });
+                        }
+                    }
+
+
+                    @if (User.IsInRole("Staff") && slot.StudentID == null)
+                    {
+                        @Html.ActionLink("Delete Slot |", "Delete", new { RoomID = slot.RoomID, StartTime = slot.StartTime.ToString("s") });
+                    }
                     @Html.IdForModel()
                 </td>
             </tr>
