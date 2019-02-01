@@ -8,11 +8,11 @@ namespace ASR_Web.Repositories
 {
     public interface IRoomRepository
     {
-        IEnumerable<Room> All();
+        IEnumerable<Room> GetAllRooms();
 
         Room Find(string roomID);
         Room Create(Room room);
-        Room Update(Room room);
+        Room Update(Room oldRoom, Room newRoom);
         Room Validate(Room room);
 
         bool Delete(Room room);

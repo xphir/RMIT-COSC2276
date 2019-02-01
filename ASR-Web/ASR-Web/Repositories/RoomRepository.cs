@@ -16,7 +16,7 @@ namespace ASR_Web.Repositories
             _db = context;
         }
 
-        public IEnumerable<Room> All()
+        public IEnumerable<Room> GetAllRooms()
         {
             return _db.Room.ToList();
         }
@@ -60,15 +60,18 @@ namespace ASR_Web.Repositories
             return _db.Room.FirstOrDefault(s => s.RoomID == roomID.ToUpper());
         }
 
-        public Room Update(Room room)
+        public Room Update(Room oldRoom, Room newRoom)
         {
-            var dbRoom = Find(room.RoomID);
-            if (dbRoom != null)
-            {
-                dbRoom.RoomID = room.RoomID;
-                _db.SaveChanges();
-            }
-            return dbRoom;
+            //var dbOldRoom = Find(oldRoom.RoomID);
+            //var dbNewRoom = Find(newRoom.RoomID);
+
+            //if (dbOldRoom != null && dbNewRoom == null)
+            //{
+            //    dbOldRoom.RoomID = newRoom.RoomID;
+            //    _db.SaveChanges();
+            //    return dbOldRoom;
+            //}
+            return null;
         }
 
         public Room Validate(Room room)

@@ -24,6 +24,8 @@ namespace ASR_Web.Repositories
         IEnumerable<String> GetDistinctStudents();
 
         Slot Find(string roomID, DateTime startTime);
+        Slot Book(Slot slot, string studentID);
+        Slot Unbook(Slot slot);
         Slot Create(Slot slot);
         Slot Update(Slot slot);
         Slot Validate(Slot slot);

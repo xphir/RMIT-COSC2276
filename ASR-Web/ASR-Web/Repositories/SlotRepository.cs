@@ -32,7 +32,6 @@ namespace ASR_Web.Repositories
             
         }
       
-
         public IEnumerable<Slot> GetAllSlots()
         {
             return BaseSlotSelector().ToList();
@@ -110,6 +109,32 @@ namespace ASR_Web.Repositories
                     return slot;
                 }
                 return null;
+            }
+            return null;
+        }
+
+        public Slot Book(Slot slot, string studentID)
+        {
+            var dbSlot = Find(slot.RoomID, slot.StartTime);
+
+            if (dbSlot != null && dbSlot.StudentID == null)
+            {
+                dbSlot.StudentID = studentID;
+                _db.SaveChanges();
+                return dbSlot;
+            }
+            return null;
+        }
+
+        public Slot Unbook(Slot slot)
+        {
+            var dbSlot = Find(slot.RoomID, slot.StartTime);
+
+            if (dbSlot != null && dbSlot.StudentID != null)
+            {
+                dbSlot.StudentID = null;
+                _db.SaveChanges();
+                return dbSlot;
             }
             return null;
         }

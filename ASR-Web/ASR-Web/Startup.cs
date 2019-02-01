@@ -57,6 +57,8 @@ namespace ASR_Web
             // repositories
             services.AddScoped<ISlotRepository, SlotRepository>();
             services.AddScoped<IRoomRepository, RoomRepository>();
+            services.AddScoped<IStudentRepository, StudentRepository>();
+            services.AddScoped<IStaffRepository, StaffRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -22,7 +22,6 @@ namespace ASR_Web.Controllers
         public async Task<IActionResult> Index()
         {
             return View(await _context.Staff.ToListAsync());
-            //View(await _context.Slot.Include(s => s.Room).Include(s => s.Staff).Include(s => s.Student).ToListAsync());
         }
     }
 }
