@@ -37,22 +37,18 @@ namespace ASR_Web.Repositories
         public bool Delete(Room room)
         {
             var dbRoom = Find(room.RoomID);
+
             if (dbRoom != null)
             {
                 _db.Room.Remove(dbRoom);
                 _db.SaveChanges();
+                return true;
             }
             else
             {
                 return false;
             }
 
-            if (Find(room.RoomID) == null)
-            {
-                return true;
-            }
-
-            return false;
         }
 
         public Room Find(string roomID)
