@@ -22,4 +22,17 @@
      </ul>
 </div>
 
-@{await Html.RenderPartialAsync("_APIInfo");}
+<div>
+    <h3>Staff FAQ</h3>
+    <p>Note: all of this asumes you are logged in as a staff member</p>
+    <ul>
+        <li>How do I Create a slot?: Go to the "Slots" page in the nav bar and click on "Create New Slot" it will take you to the slot creation page. From there you can enter the details of the slot and submit (note: the business rules). After submission the page will then tell you if it was successfully created or not</li>
+    </ul>
+
+    <h3>Students FAQ</h3>
+    <ul>
+        <li>FIL HERE</li>
+    </ul>
+</div>
+
+    @{await Html.RenderPartialAsync("_APIInfo");}
