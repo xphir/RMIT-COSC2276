@@ -6,4 +6,20 @@
 
 <p>This is the FAQ (Frequently Asked Questions) Page</p>
 
+<div>
+    <h3>Website Usage</h3>
+    <p>This is a venue booking system, usable by both staff and students.</p>
+    <p>You will need to register (and be alocateed your role by our admin) and login to be able to use the system.</p>
+    <p>Once logged in you will be give access to the apropriate pages, depending on your role.</p>
+    <h4>Pages Summary</h4>
+    <ul>
+        <li>Staff: A list of the staff members within the system</li>
+        <li>Students:  A list of the students within the system</li>
+        <li>Rooms:  A list of the rooms within the system</li>
+        <li>Slots (ALL): The main venue booking system. It will contain a list of all the current slots within the system, along with a filter system to allow users to filter out specific types of slots.</li>
+        <li>Slots (Staff): as a staff member you can create new slots, delete slots without a booking and view all slot details</li>
+        <li>Slots (Students): as a student you can book slots fror yourself, unbook your booked slots and view all slot details</li>
+     </ul>
+</div>
+
 @{await Html.RenderPartialAsync("_APIInfo");}
