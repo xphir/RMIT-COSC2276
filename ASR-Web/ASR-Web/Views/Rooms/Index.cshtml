@@ -4,6 +4,8 @@
     ViewData["Title"] = "Rooms";
 }
 
+<h3>Rooms List</h3>
+
 <table class="table">
     <thead>
         <tr>
@@ -19,11 +21,6 @@
             <tr>
                 <td>
                     @Html.DisplayFor(model => room.RoomID)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@room.RoomID">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@room.RoomID">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@room.RoomID">Delete</a>
                 </td>
             </tr>
         }

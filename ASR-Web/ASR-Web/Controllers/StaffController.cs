@@ -10,9 +10,9 @@ namespace ASR_Web.Controllers
 {
     public class StaffController : Controller
     {
-        private readonly AsrContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public StaffController(AsrContext context)
+        public StaffController(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -22,7 +22,6 @@ namespace ASR_Web.Controllers
         public async Task<IActionResult> Index()
         {
             return View(await _context.Staff.ToListAsync());
-            //View(await _context.Slot.Include(s => s.Room).Include(s => s.Staff).Include(s => s.Student).ToListAsync());
         }
     }
 }

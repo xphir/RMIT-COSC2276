@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ASR_Web.Migrations
 {
-    [DbContext(typeof(AsrContext))]
+    [DbContext(typeof(ApplicationDbContext))]
     [Migration("20190125023835_Initial")]
     partial class Initial
     {

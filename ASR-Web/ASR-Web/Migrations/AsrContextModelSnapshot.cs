@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ASR_Web.Migrations
 {
-    [DbContext(typeof(AsrContext))]
+    [DbContext(typeof(ApplicationDbContext))]
     partial class AsrContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

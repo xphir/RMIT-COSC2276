@@ -31,13 +31,17 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="FAQ">FAQ</a></li>
-                    <li><a asp-area="" asp-controller="Slots" asp-action="Index">Slots</a></li>
-                    <li><a asp-area="" asp-controller="Staff" asp-action="Index">Staff</a></li>
-                    <li><a asp-area="" asp-controller="Students" asp-action="Index">Students</a></li>
-                    <li><a asp-area="" asp-controller="Rooms" asp-action="Index">Rooms</a></li>
+                    @if (User.IsInRole("Student") || User.IsInRole("Staff"))
+                    {
+                        <li><a asp-area="" asp-controller="Slots" asp-action="Index">Slots</a></li>
+                        <li><a asp-area="" asp-controller="Staff" asp-action="Index">Staff</a></li>
+                        <li><a asp-area="" asp-controller="Students" asp-action="Index">Students</a></li>
+                        <li><a asp-area="" asp-controller="Rooms" asp-action="Index">Rooms</a></li>
+
+                    }
+                    <li><a asp-area="" asp-controller="SiteMap" asp-action="Index">SiteMap</a></li>
                 </ul>
                 <partial name="_LoginPartial" />
             </div>

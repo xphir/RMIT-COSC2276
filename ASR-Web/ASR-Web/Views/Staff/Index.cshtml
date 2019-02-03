@@ -4,6 +4,8 @@
     ViewData["Title"] = "Index";
 }
 
+<h3>Staff List</h3>
+
 <table class="table">
     <thead>
         <tr>
@@ -31,11 +33,6 @@
                 </td>
                 <td>
                     @Html.DisplayFor(staffMember => staff.Email)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@staff.StaffID">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@staff.StaffID">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@staff.StaffID">Delete</a>
                 </td>
             </tr>
         }

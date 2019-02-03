@@ -1,6 +1,22 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<Asr.Models.ApplicationUser> SignInManager
+@inject UserManager<Asr.Models.ApplicationUser> UserManager
+
+<h2> Welcome to the Appointment Scheduling and Reservation System (ASR)</h2>
+@if (User.IsInRole("Staff") || User.IsInRole("Student"))
+{
+    <p> Welcome @UserManager.GetUserName(User)! </p>
+
+}
+else
+{
+    <p> In order to access Staff and Student Features (Creating booking slots, booking appointments etc) please login using your RMIT account details <a href="/Identity/Account/login">HERE</a>.</p>
+    <p> For information on how to use the ASR system and its features go to the FAQ Page <a href="/Home/FAQ/">HERE</a>.</p>
+}
 
 
 

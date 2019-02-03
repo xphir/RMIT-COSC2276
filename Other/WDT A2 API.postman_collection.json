@@ -1,0 +1,693 @@
+{
+	"info": {
+		"_postman_id": "f88cff65-c0f2-41b5-b9cb-98d337fb5ee1",
+		"name": "WDT A2 API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "API/Staff",
+			"item": [
+				{
+					"name": "Get all staff",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://localhost:44300/api/Staff/",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44300",
+							"path": [
+								"api",
+								"Staff",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get staff details",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://localhost:44300/api/Staff/e12345",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44300",
+							"path": [
+								"api",
+								"Staff",
+								"e12345"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create staff",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"staffID\": \"e12321\",\n    \"name\": \"John Snow\",\n    \"email\": \"e12321@rmit.edu.au\"\n}"
+						},
+						"url": {
+							"raw": "https://localhost:44300/api/Staff/Create",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44300",
+							"path": [
+								"api",
+								"Staff",
+								"Create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update staff",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"staffID\": \"e12341\",\n    \"name\": \"John Targaryen\",\n    \"email\": \"e12321@rmit.edu.au\"\n}"
+						},
+						"url": {
+							"raw": "https://localhost:44300/api/Staff/Update/e12321",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44300",
+							"path": [
+								"api",
+								"Staff",
+								"Update",
+								"e12321"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete staff",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"staffID\": \"e12341\",\n    \"name\": \"John Targaryen\",\n    \"email\": \"e12321@rmit.edu.au\"\n}"
+						},
+						"url": {
+							"raw": "https://localhost:44300/api/Staff/Delete",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44300",
+							"path": [
+								"api",
+								"Staff",
+								"Delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "API/Student",
+			"item": [
+				{
+					"name": "Get all students",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://localhost:44300/api/Student/",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44300",
+							"path": [
+								"api",
+								"Student",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get student details",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://localhost:44300/api/Student/s1234567",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44300",
+							"path": [
+								"api",
+								"Student",
+								"s1234567"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create student",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"studentID\": \"s1234321\",\n\t\"name\": \"John\",\n\t\"email\": \"s1234321@student.rmit.edu.au\"\n}"
+						},
+						"url": {
+							"raw": "https://localhost:44300/api/Student/Create",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44300",
+							"path": [
+								"api",
+								"Student",
+								"Create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update students",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"studentID\": \"s1234321\",\n\t\"name\": \"John Targaryen\",\n\t\"email\": \"s1234321@student.rmit.edu.au\"\n}"
+						},
+						"url": {
+							"raw": "https://localhost:44300/api/Student/Update/s1234321",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44300",
+							"path": [
+								"api",
+								"Student",
+								"Update",
+								"s1234321"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete student",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"studentID\": \"s1234321\",\n\t\"name\": \"John Targaryen\",\n\t\"email\": \"s1234321@student.rmit.edu.au\"\n}"
+						},
+						"url": {
+							"raw": "https://localhost:44300/api/Student/Delete",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44300",
+							"path": [
+								"api",
+								"Student",
+								"Delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "API/Room",
+			"item": [
+				{
+					"name": "Get all rooms",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://localhost:44300/api/Room/",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44300",
+							"path": [
+								"api",
+								"Room",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create room",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"roomID\": \"E\"\n}"
+						},
+						"url": {
+							"raw": "https://localhost:44300/api/Room/Create",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44300",
+							"path": [
+								"api",
+								"Room",
+								"Create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit room",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"roomID\": \"F\"\n}"
+						},
+						"url": {
+							"raw": "https://localhost:44300/api/Room/Edit/E",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44300",
+							"path": [
+								"api",
+								"Room",
+								"Edit",
+								"E"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete room",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"roomID\": \"E\"\n}"
+						},
+						"url": {
+							"raw": "https://localhost:44300/api/Room/Delete",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44300",
+							"path": [
+								"api",
+								"Room",
+								"Delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "API/Slot",
+			"item": [
+				{
+					"name": "Get all slots",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://localhost:44300/api/Slot/",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44300",
+							"path": [
+								"api",
+								"Slot",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all slots for specified staff",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://localhost:44300/api/Slot/StaffBooking/e12345",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44300",
+							"path": [
+								"api",
+								"Slot",
+								"StaffBooking",
+								"e12345"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all slots for a specifided student",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://localhost:44300/api/Slot/StudentBooking/s1234567",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44300",
+							"path": [
+								"api",
+								"Slot",
+								"StudentBooking",
+								"s1234567"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create slot",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"roomID\": \"A\",\n    \"startTime\": \"2019-03-12T10:00:00\",\n    \"staffID\": \"e56789\"\n}"
+						},
+						"url": {
+							"raw": "https://localhost:44300/api/Slot/Create/",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44300",
+							"path": [
+								"api",
+								"Slot",
+								"Create",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Book slot",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"roomID\": \"A\",\n    \"startTime\": \"2019-03-12T10:00:00\",\n    \"staffID\": \"e56789\"\n}"
+						},
+						"url": {
+							"raw": "https://localhost:44300/api/Slot/Book/s1234567",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44300",
+							"path": [
+								"api",
+								"Slot",
+								"Book",
+								"s1234567"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Unbook Slot",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"roomID\": \"A\",\n    \"startTime\": \"2019-03-12T10:00:00\",\n    \"staffID\": \"e56789\"\n}"
+						},
+						"url": {
+							"raw": "https://localhost:44300/api/Slot/Unbook/",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44300",
+							"path": [
+								"api",
+								"Slot",
+								"Unbook",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get slot details",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"roomID\": \"A\",\n    \"startTime\": \"2019-03-12T10:00:00\",\n    \"staffID\": \"e56789\"\n}"
+						},
+						"url": {
+							"raw": "https://localhost:44300/api/Slot/Details/",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44300",
+							"path": [
+								"api",
+								"Slot",
+								"Details",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete slot",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"roomID\": \"A\",\n    \"startTime\": \"2019-03-12T10:00:00\",\n    \"staffID\": \"e56789\",\n    \"studentID\": \"s1234567\"\n}"
+						},
+						"url": {
+							"raw": "https://localhost:44300/api/Slot/Delete",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44300",
+							"path": [
+								"api",
+								"Slot",
+								"Delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

@@ -19,10 +19,10 @@ namespace ASR_Web.Areas.Identity.Pages.Account
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
-        private readonly AsrContext _context;
+        private readonly ApplicationDbContext _context;
 
         public RegisterModel(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager,
-            ILogger<RegisterModel> logger, AsrContext context)
+            ILogger<RegisterModel> logger, ApplicationDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
