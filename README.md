@@ -1,5 +1,6 @@
 # Web Development Technologies Assignment 2 [COSC2276-A2 WDT]
 
+
 *Brief*
 >A school is in need for an Appointment Scheduling and Reservation (ASR) system. They
 use a manual system currently, where the reservations are made by an admin and
@@ -14,6 +15,10 @@ the Web ASR system is to be created using ASP.<span></span>NET Core 2.1/2.2 writ
 a Microsoft SQL Server backend. 
 
 For more detailed information please see  [Assignment 1 Brief](/Other/WDT_Assignment_1.pdf) &  [Assignment 2 Brief](/Other/WDT_Assignment_2.pdf)
+
+## Authors
+- Elliot Schot <s3530160@student.rmit.edu.au>
+- Albert Gromek <s3432636@student.rmit.edu.au>
 
 ## Tech Used
 Main Website [ASR-WEB] 

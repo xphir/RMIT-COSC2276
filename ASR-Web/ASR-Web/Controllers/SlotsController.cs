@@ -121,7 +121,7 @@ namespace ASR_Web.Controllers
         }
 
         // GET: Slots/Book https://localhost:44300/Slots/Book?RoomID=A&StartTime=2019-02-20T10%3A00%3A00
-        public async Task<IActionResult> Book(string RoomID, String StartTime, String BookingID)
+        public IActionResult Book(string RoomID, String StartTime, String BookingID)
         {
             //Check the RoomID & StartTime fields are there
             if ((string.IsNullOrEmpty(RoomID)) && (string.IsNullOrEmpty(StartTime)))
@@ -145,15 +145,19 @@ namespace ASR_Web.Controllers
             }
             else
             {
-                _repo.Book(selectedSlot, BookingID);
+                var validSlot = ValidateBookSlot(selectedSlot.RoomID, selectedSlot.StartTime, selectedSlot.StudentID);
+                if (validSlot != null)
+                {
+                    _repo.Book(selectedSlot, BookingID);
+                    return View("~/Views/Slots/SuccessfulBooking.cshtml");
+                }
+                
             }
-
-
-            return View("~/Views/Slots/SuccessfulBooking.cshtml");
+            return NotFound();
         }
 
         // GET: Slots/Unbook
-        public async Task<IActionResult> Unbook(string RoomID, String StartTime)
+        public IActionResult Unbook(string RoomID, String StartTime)
         {
             //Check the RoomID & StartTime fields are there
             if ((string.IsNullOrEmpty(RoomID)) && (string.IsNullOrEmpty(StartTime)))
@@ -183,7 +187,7 @@ namespace ASR_Web.Controllers
         }
 
         // GET: Slots/Delete
-        public async Task<IActionResult> Delete(string RoomID, String StartTime)
+        public IActionResult Delete(string RoomID, String StartTime)
         {
             //Check the RoomID & StartTime fields are there
             if ((string.IsNullOrEmpty(RoomID)) && (string.IsNullOrEmpty(StartTime)))
@@ -210,6 +214,12 @@ namespace ASR_Web.Controllers
                 _repo.Delete(selectedSlot);
             }
             return View("~/Views/Slots/SuccessfulBooking.cshtml");
+        }
+
+        private Slot ValidateBookSlot(string inputRoom, DateTime inputDate, string inputStaffID, string inputStudentID)
+        {
+
+            return null;
         }
 
 
@@ -278,6 +288,69 @@ namespace ASR_Web.Controllers
         }
         //VALIDATE SLOT END
 
+
+        //BOOK SLOT START
+        public Slot ValidateBookSlot(string inputRoom, DateTime inputDate, string inputStudentID)
+        {
+            DateTime returnDate;
+            DateTime? returnDateNullable;
+
+            //VALIDATE THE ROOM
+            if (_roomRepo.Find(inputRoom) == null)
+            {
+                //Console.WriteLine("Unable to create slot: Invalid Room");
+                return null;
+            }
+
+            //VALIDATE THE DATE + TIME
+            returnDateNullable = Slot.ValidateDate(inputDate);
+            if (!(returnDateNullable.HasValue))
+            {
+                return null;
+            }
+            else
+            {
+                //Cast nullable to normal
+                returnDate = (DateTime)returnDateNullable;
+            }
+
+            //VALIDATE THE STUDENT
+            if (_studentRepo.Find(inputStudentID) == null)
+            {
+                //Console.WriteLine("Unable to book slot: Invalid StudentID");
+                return null;
+            }
+
+            //VALIDATE THE STUDENT BOOKING COUNT
+            if (_repo.SearchByStudentDate(inputStudentID, returnDate).Count() >= Constants.STUDENT_DAILY_BOOKING_LIMIT)
+            {
+                //Console.WriteLine("Unable to book slot: StudentID has to many bookings");
+                return null;
+            }
+
+            //Search for a matching slot
+            //if slotResult is null it means no match was found - or there was to many matches
+            var returnSlot = _repo.Find(inputRoom, returnDate);
+            if (returnSlot == null)
+            {
+                //Console.WriteLine("Unable to book slot: slot does not exists");
+                return null;
+            }
+
+            if (returnSlot.StudentID != null)
+            {
+                //Console.WriteLine("Unable to book slot: slot already has a booking");
+                return null;
+            }
+
+            returnSlot.StudentID = inputStudentID;
+
+            //TO GET HERE EVERYTHING ELSE PASSED
+
+            return returnSlot;
+        }
+
+        //BOOK SLOT END
 
     }
 
