@@ -79,16 +79,14 @@
                     @Html.DisplayFor(slotItem => slot.StudentID)
                 </td>
                 <td>
-
                     @* @Html.ActionLink("Edit", "Edit", new { RoomID = slot.RoomID, StartTime = slot.StartTime.ToString("s") }) | *@
-                    @Html.ActionLink("Details", "Details", new { RoomID = slot.RoomID, StartTime = slot.StartTime.ToString("s") }) |
+                    @Html.ActionLink("Details", "Details", new { RoomID = slot.RoomID, StartTime = slot.StartTime.ToString("s") })
 
                     @if (User.IsInRole("Student") && (slot.StudentID == null))
                     {
                         String StudentID = @UserManager.GetUserName(User).Substring(0, 8);
-                        //Weird bug, the book slot link won't work without two of these links. Can't figure it out so just leaving these both here for now. In my testing only one is visible.
-                        @Html.ActionLink("Book", "Book", new { RoomID = slot.RoomID, StartTime = slot.StartTime.ToString("s"), BookingID = StudentID });
-                        @Html.ActionLink("Book Slot |", "Book", new { RoomID = slot.RoomID, StartTime = slot.StartTime.ToString("s"), BookingID = StudentID });
+                        <text> | </text>
+                        @Html.ActionLink("Make Booking", "Book", new { RoomID = slot.RoomID, StartTime = slot.StartTime.ToString("s"), BookingID = StudentID });
 
                     }
 
@@ -98,14 +96,16 @@
                         String BookedID = slot.StudentID;
                         if (StudentID == BookedID)
                         {
-                            @Html.ActionLink("Delete Booking |", "Book", new { RoomID = slot.RoomID, StartTime = slot.StartTime.ToString("s") });
+                            <text> | </text>
+                            @Html.ActionLink("Delete Booking", "Unbook", new { RoomID = slot.RoomID, StartTime = slot.StartTime.ToString("s") });
                         }
                     }
 
 
                     @if (User.IsInRole("Staff") && slot.StudentID == null)
                     {
-                        @Html.ActionLink("Delete Slot |", "Delete", new { RoomID = slot.RoomID, StartTime = slot.StartTime.ToString("s") });
+                        <text> | </text>
+                        @Html.ActionLink("Delete Slot", "Delete", new { RoomID = slot.RoomID, StartTime = slot.StartTime.ToString("s") });
                     }
                     @Html.IdForModel()
                 </td>

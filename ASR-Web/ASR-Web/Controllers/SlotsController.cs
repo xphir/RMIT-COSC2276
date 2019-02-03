@@ -122,7 +122,7 @@ namespace ASR_Web.Controllers
         }
 
         // GET: Slots/Unbook
-        public async Task<IActionResult> Unbook(string RoomID, String StartTime, String BookingID)
+        public async Task<IActionResult> Unbook(string RoomID, String StartTime)
         {
             //Check the RoomID & StartTime fields are there
             if ((string.IsNullOrEmpty(RoomID)) && (string.IsNullOrEmpty(StartTime)))
@@ -148,7 +148,7 @@ namespace ASR_Web.Controllers
             {
                 _repo.Unbook(selectedSlot);
             }
-            return View("~/Views/Slots/SuccessfulBooking.cshtml");
+            return View("~/Views/Slots/SuccessfulUnbooking.cshtml");
         }
 
         // GET: Slots/Delete
