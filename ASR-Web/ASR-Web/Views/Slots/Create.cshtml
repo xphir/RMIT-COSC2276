@@ -1,4 +1,4 @@
-﻿@model Slot
+﻿@model ASR_Web.Models.SlotViewModels.SlotCreateViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -6,8 +6,7 @@
 
 <h2>Create</h2>
 
-
-
+<p>@Html.DisplayFor(model => model.Result)</p>
 <h4>Slot</h4>
 <hr />
 <div id="AddSlot">
@@ -17,26 +16,26 @@
 
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
-                    <label asp-for="RoomID" class="control-label"></label>
-                    <input asp-for="RoomID" class="form-control" />
-                    <span asp-validation-for="RoomID" class="text-danger"></span>
+                    <label asp-for="Slot.RoomID" class="control-label"></label>
+                    <input asp-for="Slot.RoomID" class="form-control" />
+                    <span asp-validation-for="Slot.RoomID" class="text-danger"></span>
                 </div>
-               
-        <div class="form-group">
-            <label asp-for="StartTime" class="control-label"></label>
-            <input asp-for="StartTime" class="form-control" />
-            <span asp-validation-for="StartTime" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="StaffID" class="control-label"></label>
-            <input asp-for="StaffID" class="form-control" />
-            <span asp-validation-for="StaffID" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="StudentID" class="control-label"></label>
-            <input asp-for="StudentID" class="form-control" />
-            <span asp-validation-for="StudentID" class="text-danger"></span>
-        </div>
+
+                <div class="form-group">
+                    <label asp-for="Slot.StartTime" class="control-label"></label>
+                    <input asp-for="Slot.StartTime" class="form-control" />
+                    <span asp-validation-for="Slot.StartTime" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Slot.StaffID" class="control-label"></label>
+                    <input asp-for="Slot.StaffID" class="form-control" />
+                    <span asp-validation-for="Slot.StaffID" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Slot.StudentID" class="control-label"></label>
+                    <input asp-for="Slot.StudentID" class="form-control" />
+                    <span asp-validation-for="Slot.StudentID" class="text-danger"></span>
+                </div>
                 <div class="form-group">
                     <input type="submit" value="Create" class="btn btn-default" />
                 </div>

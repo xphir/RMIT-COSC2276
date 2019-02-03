@@ -18,6 +18,8 @@ namespace ASR_Web.Repositories
         IEnumerable<Slot> SearchByDate(DateTime start, DateTime end);
         IEnumerable<Slot> SearchByStaff(string  staffID);
         IEnumerable<Slot> SearchByStudent(string studentID);
+        IEnumerable<Slot> SearchByStaffDate(string staffID, DateTime inputDate);
+        IEnumerable<Slot> SearchByStudentDate(string studentID, DateTime inputDate);
 
         IEnumerable<String> GetDistinctRooms();
         IEnumerable<String> GetDistinctStaff();

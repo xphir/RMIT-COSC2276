@@ -9,6 +9,6 @@ namespace ASR_Web.Models.SlotViewModels
     public class SlotCreateViewModel
     {
         public Slot Slot { get; set; }
-        public SelectList Rooms { get; set; }
+        public string Result { get; set; }
     }
 }

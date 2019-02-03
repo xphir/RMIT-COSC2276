@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Asr.Data;
 using ASR_Web.Data;
 using ASR_Web.Models;
 using ASR_Web.Models.SlotViewModels;
@@ -15,12 +16,18 @@ namespace ASR_Web.Controllers
     public class SlotsController : Controller
     {
         private ISlotRepository _repo;
+        private IRoomRepository _roomRepo;
+        private IStaffRepository _staffRepo;
+        private IStudentRepository _studentRepo;
         private ApplicationDbContext _db;
 
-        public SlotsController(ApplicationDbContext db, ISlotRepository repository)
+        public SlotsController(ApplicationDbContext db, ISlotRepository repository, IRoomRepository roomRepository, IStaffRepository staffRepository, IStudentRepository studentRepository)
         {
             _db = db;
             _repo = repository;
+            _roomRepo = roomRepository;
+            _staffRepo = staffRepository;
+            _studentRepo = studentRepository;
         }
 
         //public IActionResult Index()
@@ -73,7 +80,12 @@ namespace ASR_Web.Controllers
         // GET: Slots/Create
         public IActionResult Create()
         {
-            return View();
+            return View(new SlotCreateViewModel
+            {
+                Slot = new Slot(),
+                Result = "",
+            });
+            //return View();
         }
 
         // POST: Slots/Create
@@ -81,12 +93,31 @@ namespace ASR_Web.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(Slot slot)
         {
+            //Check model is valid
             if (ModelState.IsValid)
             {
-                _repo.Create(slot);
+                //Validate slot via business rules
+                var newSlot = ValidateCreateSlot(slot.RoomID, slot.StartTime, slot.StaffID);
+                if (newSlot != null)
+                {
+                    _repo.Create(slot);
+                    return View(new SlotCreateViewModel
+                    {
+                        Slot = new Slot(),
+                        Result = "Slot created successfuly",
+                    });
+                }
+                return View(new SlotCreateViewModel
+                {
+                    Slot = slot,
+                    Result = "Failed to create slot: Breaks business rules",
+                });
             }
-
-            return View();
+            return View(new SlotCreateViewModel
+            {
+                Slot = slot,
+                Result = "Failed to create slot: Model invalid",
+            });
         }
 
         // GET: Slots/Book https://localhost:44300/Slots/Book?RoomID=A&StartTime=2019-02-20T10%3A00%3A00
@@ -180,7 +211,76 @@ namespace ASR_Web.Controllers
             }
             return View("~/Views/Slots/SuccessfulBooking.cshtml");
         }
+
+
+        //VALIDATE SLOT START
+        private Slot ValidateCreateSlot(string inputRoom, DateTime inputDate, string inputStaffID)
+        {
+            DateTime returnDate;
+            DateTime? returnDateNullable;
+
+            //VALIDATE THE ROOM
+            if (_roomRepo.Find(inputRoom) == null)
+            {
+                //Console.WriteLine("Unable to create slot: Invalid Room");
+                return null;
+            }
+
+            //VALIDATE THE DATE + TIME
+            returnDateNullable = Slot.ValidateDate(inputDate);
+            if (!(returnDateNullable.HasValue))
+            {
+                return null;
+            }
+            else
+            {
+                //Cast nullable to normal
+                returnDate = (DateTime)returnDateNullable;
+            }
+
+            //VALIDATE THE STAFF
+            if (_staffRepo.Find(inputStaffID) == null)
+            {
+                //Console.WriteLine("Unable to create slot: Invalid StaffID");
+                return null;
+            }
+
+            //VALIDATE THE BOOKING COUNT
+            if (_repo.SearchByStaffDate(inputStaffID, returnDate).Count() >= Constants.STAFF_DAILY_BOOKING_LIMIT)
+            {
+                //Console.WriteLine("Unable to create slot: StaffID has to many bookings");
+                return null;
+            }
+
+            //VALIDATE THE BOOKING COUNT
+            if (_repo.GetRoomSlotsGivenDay(inputRoom, returnDate).Count() >= Constants.ROOM_DAILY_BOOKING_LIMIT)
+            {
+                //Console.WriteLine("Unable to create slot: Room has to many bookings");
+                return null;
+            }
+
+            //Search for a matching slot
+            if (_repo.Find(inputRoom, returnDate) != null)
+            {
+                //Console.WriteLine("Unable to create slot: Matching slot already exists");
+                return null;
+            }
+
+            //TO GET HERE EVERYTHING ELSE PASSED
+
+            //CREATE NEW SLOT
+            var returnSlot = new Slot();
+            returnSlot.RoomID = inputRoom;
+            returnSlot.StartTime = returnDate;
+            returnSlot.StaffID = inputStaffID;
+
+            return returnSlot;
+        }
+        //VALIDATE SLOT END
+
+
     }
+
 
 
 }

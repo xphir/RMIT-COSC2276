@@ -191,6 +191,20 @@ namespace ASR_Web.Repositories
                 .ToList();
         }
 
+        public IEnumerable<Slot> SearchByStaffDate(string staffID, DateTime inputDate)
+        {
+            return BaseSlotSelector()
+                .Where(s => s.StaffID == staffID.ToLower() && s.StartTime.Date == inputDate.Date)
+                .ToList();
+        }
+
+        public IEnumerable<Slot> SearchByStudentDate(string studentID, DateTime inputDate)
+        {
+            return BaseSlotSelector()
+                .Where(s => s.StudentID == studentID.ToLower() && s.StartTime.Date == inputDate.Date)
+                .ToList();
+        }
+
         public IEnumerable<Slot> SearchByStudent(string studentID)
         {
             return BaseSlotSelector()
