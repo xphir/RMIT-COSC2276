@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "SiteMap";
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>SiteMap</title>
+</head>
+<body>
+    <h1> Site Map</h1>
+    <ul>
+        <!-- Start Homepage  -->
+        <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+        <!-- End Homepage -->
+        <!-- Start About us -->
+        <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
+        <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+        <li><a asp-area="" asp-controller="Home" asp-action="FAQ">FAQ</a></li>
+        @if (User.IsInRole("Student") || User.IsInRole("Staff"))
+                    {
+        <li><a asp-area="" asp-controller="Slots" asp-action="Create">Slots</a></li>
+
+        @if (User.IsInRole("Staff"))
+                        {
+        <ul>
+            <li><a asp-area="" asp-controller="Slots" asp-action="Create">Create Slot</a></li>
+        </ul>
+                        }
+
+        <li><a asp-area="" asp-controller="Staff" asp-action="Index">Staff</a></li>
+        <li><a asp-area="" asp-controller="Students" asp-action="Index">Students</a></li>
+        <li><a asp-area="" asp-controller="Rooms" asp-action="Index">Rooms</a></li>
+        
+                     }  
+        <li><a asp-area="" asp-controller="SiteMap" asp-action="Index">Site Map</a></li>
+    </ul>
+</body>
+</html>
