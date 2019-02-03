@@ -35,8 +35,8 @@ Angular Site
 - Fix external API communication bug (It seems there is something blocking the Angular App from communicating with an external/different port API)
 
 ## Other Information
--	Inside /Other/ is a PDF of the current database entity relationship diagram
--	Inside /Other/ is a Postman config file for each of the API connections, along with the relevant data for said calls
+-	Inside /Other/ is a PDF of the current [Database Entity Relationship Diagram](/Other/ASR-Database-ER-Diagram.pdf)
+-	Inside /Other/ is a [API Postman Config file](/Other/WDT A2 API.postman_collection.json) for each of the API connections, along with the relevant data for said calls 
 
 ## API
 
