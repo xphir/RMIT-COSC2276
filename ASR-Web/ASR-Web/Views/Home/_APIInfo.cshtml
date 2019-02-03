@@ -1,0 +1,168 @@
+﻿<div>
+    <h3>API Endpoints</h3>
+    <table cellpadding="10">
+        <tr>
+            <th>API Link</th>
+            <th>Information</th>
+            <th>Type</th>
+            <th>Variable</th>
+        </tr>
+        <tr>
+            <th>&nbsp;</th>
+        </tr>
+        <tr>
+            <th>Staff API</th>
+        </tr>
+        <tr>
+            <th><a href="/api/Staff">/api/Staff/</a></th>
+            <th>Get all staff</th>
+            <th>GET</th>
+            <th>None</th>
+        </tr>
+        <tr>
+            <th><a href="/api/Staff/e12345">/api/Staff/&lt;StaffID&gt;</a></th>
+            <th>Get specific staff details</th>
+            <th>GET</th>
+            <th>&lt;StaffID&gt;</th>
+        </tr>
+        <tr>
+            <th><a href="/api/Staff/Create">/api/Staff/Create</a></th>
+            <th>Create a new staff member</th>
+            <th>POST</th>
+            <th>(Message Body Staff Object)</th>
+        </tr>
+        <tr>
+            <th><a href="/api/Staff/Update/e12321">/api/Staff/Update/&lt;StaffID&gt;</a></th>
+            <th>Update a specific staff member</th>
+            <th>PUT</th>
+            <th>&lt;StaffID&gt; &amp; (Message Body Staff Object)</th>
+        </tr>
+        <tr>
+            <th><a href="/api/Staff/Delete">/api/Staff/Delete</a></th>
+            <th>Delete a specific staff member</th>
+            <th>DELETE</th>
+            <th>(Message Body Staff Object)</th>
+        </tr>
+        <tr>
+            <th>&nbsp;</th>
+        </tr>
+        <tr>
+            <th>Student API</th>
+        </tr>
+        <tr>
+            <th><a href="/api/Student">/api/Student</a></th>
+            <th>Get all students</th>
+            <th>GET</th>
+            <th>None</th>
+        </tr>
+        <tr>
+            <th><a href="/api/Student/s1234567">/api/Student/&lt;StudentID&gt;</a></th>
+            <th>Get specific student details</th>
+            <th>GET</th>
+            <th>&lt;StudentID&gt;</th>
+        </tr>
+        <tr>
+            <th><a href="/api/Student/Create">/api/Student/Create</a></th>
+            <th>Create a new student</th>
+            <th>POST</th>
+            <th>(Message Body Student Object)</th>
+        </tr>
+        <tr>
+            <th><a href="/api/Student/Update/s1234321">/api/Student/Update/&lt;StudentID&gt;</a></th>
+            <th>Update a specific student</th>
+            <th>PUT</th>
+            <th>&lt;StudentID&gt; &amp; (Message Body Student Object)</th>
+        </tr>
+        <tr>
+            <th><a href="/api/Student/Delete">/api/Student/Delete</a></th>
+            <th>Delete a specific student</th>
+            <th>DELETE</th>
+            <th>(Message Body Student Object)</th>
+        </tr>
+        <tr>
+            <th>&nbsp;</th>
+        </tr>
+        <tr>
+            <th>Room API</th>
+        </tr>
+        <tr>
+            <th><a href="/api/Room">/api/Room</a></th>
+            <th>Get all rooms</th>
+            <th>GET</th>
+            <th>None</th>
+        </tr>
+        <tr>
+            <th><a href="/api/Room/Create">/api/Room/Create</a></th>
+            <th>Create a new room</th>
+            <th>POST</th>
+            <th>(Message Body Room Object)</th>
+        </tr>
+        <tr>
+            <th><a href="/api/Room/Edit/D">/api/Room/Edit/&lt;RoomID&gt;</a></th>
+            <th>DISABLED: Update a specific Room</th>
+            <th>PUT</th>
+            <th>&lt;RoomID&gt; &amp; (Message Body Room Object)</th>
+        </tr>
+        <tr>
+            <th><a href="/api/Room/Delete">/api/Room/Delete</a></th>
+            <th>Delete a specific room</th>
+            <th>DELETE</th>
+            <th>(Message Body Room Object)</th>
+        </tr>
+        <tr>
+            <th>&nbsp;</th>
+        </tr>
+        <tr>
+            <th>Slots API</th>
+        </tr>
+        <tr>
+            <th><a href="/api/Slot/">/api/Slot/</a></th>
+            <th>Get all slots</th>
+            <th>GET</th>
+            <th>None</th>
+        </tr>
+        <tr>
+            <th><a href="/api/Slot/StaffBooking/e12345">/api/Slot/StaffBooking/&lt;StaffID&gt;</a></th>
+            <th>Get all slots for specified staff</th>
+            <th>GET</th>
+            <th>/&lt;StaffID&gt;</th>
+        </tr>
+        <tr>
+            <th><a href="/api/Slot/StudentBooking/s1234567">/api/Slot/StudentBooking/&lt;StudentID&gt;</a></th>
+            <th>Get all slots for a specifided student</th>
+            <th>GET</th>
+            <th>&lt;StudentID&gt;</th>
+        </tr>
+        <tr>
+            <th><a href="/api/Slot/Create/">/api/Slot/Create/</a></th>
+            <th>Create a new slot</th>
+            <th>POST</th>
+            <th>(Message Body Slot Object)</th>
+        </tr>
+        <tr>
+            <th><a href="/api/Slot/Book/s1234567">/api/Slot/Book/&lt;StudentID&gt;</a></th>
+            <th>Book a specific slot</th>
+            <th>PUT</th>
+            <th>&lt;StudentID&gt; &amp; (Message Body Slot Object)</th>
+        </tr>
+        <tr>
+            <th><a href="/api/Slot/Unbook/">/api/Slot/Unbook/</a></th>
+            <th>Unbook a specific slot</th>
+            <th>PUT</th>
+            <th>(Message Body Slot Object)</th>
+        </tr>
+        <tr>
+            <th><a href="/api/Slot/Details/">/api/Slot/Details/</a></th>
+            <th>Get specific slot details</th>
+            <th>POST</th>
+            <th>(Message Body Slot Object)</th>
+        </tr>
+
+        <tr>
+            <th><a href="/api/Slot/Delete">/api/Slot/Delete</a></th>
+            <th>Delete a specific slot</th>
+            <th>DELETE</th>
+            <th>(Message Body Slot Object)</th>
+        </tr>
+    </table>
+</div>

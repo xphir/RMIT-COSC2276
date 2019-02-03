@@ -3,4 +3,7 @@
 }
 <h2>@ViewData["Title"]</h2>
 
+
 <p>This is the FAQ (Frequently Asked Questions) Page</p>
+
+@{await Html.RenderPartialAsync("_APIInfo");}
