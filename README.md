@@ -43,41 +43,55 @@ Angular Site
 This project produces and uses an API, the following is the details on said API
 >Note: (Message Body X Object) means the object is expected to be sent in the body of the request eg. form POST object, or raw JSON of Object and so on (see Postman file for examples)
 
+<br><br>
 **Staff API**
+
+
 | API Link | Information | Type | Variable |
 |----------|----------|----------|----------|
 | /api/Staff/ |	Get all staff |	GET	| None
-| /api/Staff/`<StaffID>` |	Get specific staff details |	GET |	`<StaffID>`
+| /api/Staff/&lt;StaffID&gt; |	Get specific staff details |	GET |	&lt;StaffID&gt;
 | /api/Staff/Create |	Create a new staff member |	POST |	(Message Body Staff Object)
-| /api/Staff/Update/`<StaffID>` | Update a specific staff member |	PUT |	`<StaffID>` & (Message Body Staff Object)
+| /api/Staff/Update/&lt;StaffID&gt; | Update a specific staff member |	PUT |	&lt;StaffID&gt; & (Message Body Staff Object)
 | /api/Staff/Delete |	Delete a specific staff member |	DELETE |	(Message Body Staff Object)
 
 
+<br><br>
 **Student API**
+
+
 | API Link | Information | Type | Variable |
 |----------|----------|----------|----------|
 | /api/Student |	Get all students |	GET |	None
-| /api/Student/`<StudentID>` |	Get specific student details |	GET |	`<StudentID>`
+| /api/Student/&lt;StudentID&gt; |	Get specific student details |	GET | &lt;StudentID&gt;
 | /api/Student/Create |	Create a new student |	POST |	(Message Body Student Object)
-| /api/Student/Update/`<StudentID>` |	Update a specific student |	PUT |	`<StudentID>` & (Message Body Student Object)
+| /api/Student/Update/&lt;StudentID&gt; |	Update a specific student |	PUT |	&lt;StudentID&gt; & (Message Body Student Object)
 | /api/Student/Delete |	Delete a specific student |	DELETE |	(Message Body Student Object)
 
+
+<br><br>
 **Room API**
+
+
 | API Link | Information | Type | Variable |
 |----------|----------|----------|----------|
 | /api/Room |	Get all rooms |	GET |	None
 | /api/Room/Create |	Create a new room |	POST |	(Message Body Room Object)
-| /api/Room/Edit/`<RoomID>` |	DISABLED: Update a specific Room |	PUT |	`<RoomID>` & (Message Body Room Object)
+| /api/Room/Edit/&lt;RoomID&gt; |	DISABLED: Update a specific Room |	PUT |	&lt;RoomID&gt; & (Message Body Room Object)
 | /api/Room/Delete |	Delete a specific room |	DELETE |	(Message Body Room Object) 
 
+
+<br><br>
 **Slots API**
+
+
 | API Link | Information | Type | Variable |
 |----------|----------|----------|----------|
 | /api/Slot/ |	Get all slots |	GET |	None
-| /api/Slot/StaffBooking/`<StaffID>` |	Get all slots for specified staff |	GET |	`<StaffID>`
-| /api/Slot/StudentBooking/`<StudentID>` |	Get all slots for a specifided student |	GET |	`<StudentID>`
+| /api/Slot/StaffBooking/&lt;StaffID&gt; |	Get all slots for specified staff |	GET |	&lt;StaffID&gt;
+| /api/Slot/StudentBooking/&lt;StudentID&gt; |	Get all slots for a specifided student |	GET |	&lt;StudentID&gt;
 | /api/Slot/Create/ |	Create a new slot |	POST |	(Message Body Slot Object)
-| /api/Slot/Book/`<StudentID>` |	Book a specific slot |	PUT |	`<StudentID>` & (Message Body Slot Object)
+| /api/Slot/Book/&lt;StudentID&gt; |	Book a specific slot |	PUT |	&lt;StudentID&gt; & (Message Body Slot Object)
 | /api/Slot/Unbook/ |	Unbook a specific slot |	PUT |	(Message Body Slot Object)
 | /api/Slot/Details/ |	Get specific slot details |	POST |	(Message Body Slot Object)
 | /api/Slot/Delete |	Delete a specific slot |	DELETE |	(Message Body Slot Object)
